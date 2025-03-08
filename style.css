@@ -1,6 +1,6 @@
 /* General Styles */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #121212;
@@ -22,13 +22,16 @@ body {
     height: 100%;
     background: #000;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 1000;
   }
   
-  .loader img {
+  .loader-content {
+    text-align: center;
+  }
+  
+  .loader-image {
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -41,10 +44,33 @@ body {
     font-size: 1.2em;
   }
   
+  .loader-bar {
+    width: 200px;
+    height: 5px;
+    background: #444;
+    margin: 20px auto;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .loader-bar::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #ff6f61;
+    animation: loading 2s infinite;
+  }
+  
   @keyframes pulse {
     0% { transform: scale(1); }
     50% { transform: scale(1.1); }
     100% { transform: scale(1); }
+  }
+  
+  @keyframes loading {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
   }
   
   /* Theme Toggle Button */
@@ -58,6 +84,11 @@ body {
     border-radius: 50%;
     cursor: pointer;
     z-index: 1000;
+    transition: background 0.3s;
+  }
+  
+  .theme-toggle:hover {
+    background: #e65a50;
   }
   
   .theme-toggle i {
@@ -98,139 +129,8 @@ body {
     background: #e65a50;
   }
   
-  /* Carousel Section */
-  .carousel {
-    position: relative;
-    max-width: 800px;
-    margin: 0 auto;
-    overflow: hidden;
-  }
-  
-  .carousel-inner {
-    display: flex;
-    transition: transform 0.5s ease;
-  }
-  
-  .carousel-item {
-    min-width: 100%;
-    box-sizing: border-box;
-  }
-  
-  .carousel-item img, .carousel-item video {
-    width: 100%;
-    border-radius: 10px;
-  }
-  
-  .carousel-control {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  .prev {
-    left: 10px;
-  }
-  
-  .next {
-    right: 10px;
-  }
-  
-  /* Pricing Section */
-  #pricing {
-    padding: 50px 20px;
-    text-align: center;
-  }
-  
-  .pricing-cards {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  
-  .card {
-    background: #1e1e1e;
-    padding: 20px;
-    border-radius: 10px;
-    width: 300px;
-    text-align: center;
-    transition: transform 0.3s;
-  }
-  
-  .card:hover {
-    transform: scale(1.05);
-  }
-  
-  .card h3 {
-    font-size: 1.5em;
-  }
-  
-  .card .price {
-    font-size: 2em;
-    color: #ff6f61;
-  }
-  
-  .card ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .card ul li {
-    margin: 10px 0;
-  }
-  
-  /* Contact Section */
-  #contact {
-    padding: 50px 20px;
-    text-align: center;
-  }
-  
-  .contact-link {
-    display: block;
-    font-size: 1.5em;
-    color: #ff6f61;
-    text-decoration: none;
-    margin: 20px 0;
-  }
-  
-  .social-links {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
-  
-  .social-links a {
-    color: #fff;
-    font-size: 2em;
-    transition: color 0.3s;
-  }
-  
-  .social-links a:hover {
-    color: #ff6f61;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    header h1 {
-      font-size: 3em;
-    }
-  
-    header p {
-      font-size: 1.2em;
-    }
-  
-    .pricing-cards {
-      flex-direction: column;
-    }
-  }
-
   /* About Section */
-#about {
+  #about {
     padding: 50px 20px;
     text-align: center;
     background: #1e1e1e;
@@ -324,5 +224,125 @@ body {
     .about-image img {
       width: 200px;
       height: 200px;
+    }
+  }
+  
+  /* Portfolio Section */
+  #portfolio {
+    padding: 50px 20px;
+    text-align: center;
+  }
+  
+  .swiper-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .swiper-slide video {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: #ff6f61;
+  }
+  
+  .swiper-pagination-bullet {
+    background: #fff;
+  }
+  
+  .swiper-pagination-bullet-active {
+    background: #ff6f61;
+  }
+  
+  /* Pricing Section */
+  #pricing {
+    padding: 50px 20px;
+    text-align: center;
+  }
+  
+  .pricing-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    transition: transform 0.3s;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .card h3 {
+    font-size: 1.5em;
+  }
+  
+  .card .price {
+    font-size: 2em;
+    color: #ff6f61;
+  }
+  
+  .card ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .card ul li {
+    margin: 10px 0;
+  }
+  
+  /* Contact Section */
+  #contact {
+    padding: 50px 20px;
+    text-align: center;
+  }
+  
+  .contact-link {
+    display: block;
+    font-size: 1.5em;
+    color: #ff6f61;
+    text-decoration: none;
+    margin: 20px 0;
+  }
+  
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .social-links a {
+    color: #fff;
+    font-size: 2em;
+    transition: color 0.3s;
+  }
+  
+  .social-links a:hover {
+    color: #ff6f61;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    header h1 {
+      font-size: 3em;
+    }
+  
+    header p {
+      font-size: 1.2em;
+    }
+  
+    .pricing-cards {
+      flex-direction: column;
     }
   }
